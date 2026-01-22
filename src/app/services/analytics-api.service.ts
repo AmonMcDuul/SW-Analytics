@@ -6,7 +6,7 @@ import { AnalyticsSummary } from '../models/analytics-summary.model';
 
 @Injectable({ providedIn: 'root' })
 export class AnalyticsApiService {
-  private readonly baseUrl = 'https://starwatchr-api.azurewebsites.net/analytics';
+  private readonly baseUrl = 'https://starwatchr-api.azurewebsites.net/metrics';
   private http = inject(HttpClient);
 
   getPageViews(): Observable<PageView[]> {
