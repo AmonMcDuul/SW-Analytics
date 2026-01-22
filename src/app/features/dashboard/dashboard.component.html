@@ -1,90 +1,121 @@
 <section class="dashboard">
 
-  <h1>StarWatchr analytics</h1>
+  <header class="header">
+    <div>
+      <h1>StarWatchr Analytics</h1>
+      <p class="subtitle">Traffic & usage insights from StarWatchr</p>
+    </div>
+  </header>
 
   @if (store.loading()) {
-    <p>Loading analytics…</p>
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Collecting data</p>
+    </div>
   } @else {
 
-    <div class="kpis">
-      <div class="card">
-        <div class="value">{{ store.totalPageViews() }}</div>
-        <div class="label">Total pageviews</div>
+    <section class="kpi-grid">
+      <div class="kpi-card accent-blue">
+        <span class="kpi-label">Total pageviews</span>
+        <span class="kpi-value">{{ store.totalPageViews() }}</span>
       </div>
 
-      <div class="card">
-        <div class="value">{{ store.uniqueUsers() }}</div>
-        <div class="label">Unique users</div>
+      <div class="kpi-card accent-purple">
+        <span class="kpi-label">Unique users</span>
+        <span class="kpi-value">{{ store.uniqueUsers() }}</span>
       </div>
 
-      <div class="card">
-        <div class="value">{{ store.daysTracked() }}</div>
-        <div class="label">Days tracked</div>
+      <div class="kpi-card accent-amber">
+        <span class="kpi-label">Days tracked</span>
+        <span class="kpi-value">{{ store.daysTracked() }}</span>
       </div>
 
-      <div class="card">
-        <div class="value">{{ store.avgPerDay() }}</div>
-        <div class="label">Avg / day</div>
+      <div class="kpi-card accent-green">
+        <span class="kpi-label">Avg views / day</span>
+        <span class="kpi-value">{{ store.avgPerDay() }}</span>
       </div>
-    </div>
+    </section>
 
-    <h2>Daily traffic</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Day</th>
-          <th>Pageviews</th>
-          <th>Visitors</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (d of store.summary(); track d.day) {
-          <tr>
-            <td>{{ d.day }}</td>
-            <td>{{ d.pageViews }}</td>
-            <td>{{ d.uniqueVisitors }}</td>
-          </tr>
-        }
-      </tbody>
-    </table>
+    <section class="panel">
+      <h2>Daily traffic</h2>
 
-    <h2>Top pages</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Path</th>
-          <th>Views</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (p of store.topPages(); track p.path) {
-          <tr>
-            <td>{{ p.path }}</td>
-            <td>{{ p.views }}</td>
-          </tr>
-        }
-      </tbody>
-    </table>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Pageviews</th>
+              <th>Visitors</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (d of store.summary(); track d.day) {
+              <tr>
+                <td>{{ d.day }}</td>
+                <td>
+                  <span class="metric">{{ d.pageViews }}</span>
+                </td>
+                <td>
+                  <span class="metric secondary">{{ d.uniqueVisitors }}</span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-    <h2>Recent pageviews</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Day</th>
-          <th>Path</th>
-          <th>User</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (pv of store.pageViews().slice(0, 50); track pv) {
-          <tr>
-            <td>{{ pv.day }}</td>
-            <td>{{ pv.path }}</td>
-            <td>{{ pv.userSeed.slice(0, 8) }}…</td>
-          </tr>
-        }
-      </tbody>
-    </table>
+    <section class="panel">
+      <h2>Top pages</h2>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Path</th>
+              <th class="right">Views</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (p of store.topPages(); track p.path) {
+              <tr>
+                <td class="mono">{{ p.path }}</td>
+                <td class="right">
+                  <span class="pill">{{ p.views }}</span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Recent activity</h2>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Path</th>
+              <th>User</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (pv of store.pageViews().slice(0, 50); track pv.userSeed) {
+              <tr>
+                <td>{{ pv.day }}</td>
+                <td class="mono">{{ pv.path }}</td>
+                <td class="mono muted">
+                  {{ pv.userSeed.slice(0, 8) }}…
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
 
   }
 </section>
