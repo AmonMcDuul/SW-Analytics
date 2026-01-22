@@ -14,6 +14,7 @@ export class AnalyticsApiService {
   }
 
   getSummary(): Observable<AnalyticsSummary[]> {
+    console.log("get?")
     return this.http.get<AnalyticsSummary[]>(`${this.baseUrl}/summary`);
   }
 }
