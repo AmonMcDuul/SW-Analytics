@@ -8,12 +8,17 @@ import { AnalyticsApiService } from "../services/analytics-api.service";
 export class AnalyticsStore {
   private api = inject(AnalyticsApiService);
 
-  // raw data
   summary = signal<AnalyticsSummary[]>([]);
   pageViews = signal<PageView[]>([]);
   loading = signal(true);
 
-  // derived data (dashboard KPIs)
+  search = signal('');
+  page = signal(1); 
+  pageSize = signal(25);
+
+  readonly TRAFFIC_WINDOWS = [7, 30, 90] as const;
+  trafficDays = signal<(typeof this.TRAFFIC_WINDOWS)[number]>(30);
+
   totalPageViews = computed(() =>
     this.summary().reduce((sum, d) => sum + d.pageViews, 0)
   );
@@ -63,4 +68,56 @@ export class AnalyticsStore {
       this.loading.set(false);
     });
   }
+
+  filteredPageViews = computed(() => {
+    const q = this.search().toLowerCase().trim();
+
+    if (!q) return this.pageViews();
+
+    return this.pageViews().filter(p =>
+        p.userSeed.toLowerCase().includes(q) ||
+        p.path.toLowerCase().includes(q)
+    );
+    });
+
+    totalPages = computed(() =>
+    Math.ceil(this.filteredPageViews().length / this.pageSize())
+    );
+
+    paginatedPageViews = computed(() => {
+    const start = (this.page() - 1) * this.pageSize();
+    const end = start + this.pageSize();
+    return this.filteredPageViews().slice(start, end);
+    });
+
+    setSearch(value: string) {
+    this.search.set(value);
+    this.page.set(1); 
+    }
+
+    nextPage() {
+    if (this.page() < this.totalPages()) {
+        this.page.update(p => p + 1);
+    }
+    }
+
+    prevPage() {
+    if (this.page() > 1) {
+        this.page.update(p => p - 1);
+    }
+    }
+
+    visibleSummary = computed(() => {
+        const days = this.trafficDays();
+        return this.summary()
+            .slice()
+            .sort((a, b) => b.day.localeCompare(a.day))
+            .slice(0, days)
+            .reverse();
+    });
+
+    setTrafficDays(days: (typeof this.TRAFFIC_WINDOWS)[number]) {
+    this.trafficDays.set(days);
+    }
+
 }

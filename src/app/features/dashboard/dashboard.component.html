@@ -37,7 +37,20 @@
     </section>
 
     <section class="panel">
-      <h2>Daily traffic</h2>
+        <div class="panel-header">
+            <h2>Daily traffic</h2>
+
+            <div class="toggle">
+                @for (d of store.TRAFFIC_WINDOWS; track d) {
+                <button
+                    (click)="store.setTrafficDays(d)"
+                    [class.active]="store.trafficDays() === d">
+                    Last {{ d }} days
+                </button>
+                }
+            </div>
+        </div>
+
 
       <div class="table-wrapper">
         <table>
@@ -48,19 +61,15 @@
               <th>Visitors</th>
             </tr>
           </thead>
-          <tbody>
-            @for (d of store.summary(); track d.day) {
-              <tr>
+            <tbody>
+            @for (d of store.visibleSummary(); track d.day) {
+                <tr>
                 <td>{{ d.day }}</td>
-                <td>
-                  <span class="metric">{{ d.pageViews }}</span>
-                </td>
-                <td>
-                  <span class="metric secondary">{{ d.uniqueVisitors }}</span>
-                </td>
-              </tr>
+                <td><span class="metric">{{ d.pageViews }}</span></td>
+                <td><span class="metric secondary">{{ d.uniqueVisitors }}</span></td>
+                </tr>
             }
-          </tbody>
+            </tbody>
         </table>
       </div>
     </section>
@@ -91,31 +100,62 @@
     </section>
 
     <section class="panel">
-      <h2>Recent activity</h2>
+    <h2>Recent activity</h2>
 
-      <div class="table-wrapper">
+    <div class="table-toolbar">
+        <input
+        type="text"
+        placeholder="Search by path or user seed…"
+        (input)="store.setSearch($any($event.target).value)"
+        />
+
+        <span class="meta">
+        {{ store.filteredPageViews().length }} results
+        </span>
+    </div>
+
+    <div class="table-wrapper">
         <table>
-          <thead>
+        <thead>
             <tr>
-              <th>Day</th>
-              <th>Path</th>
-              <th>User</th>
+            <th>Day</th>
+            <th>Path</th>
+            <th>User</th>
             </tr>
-          </thead>
-          <tbody>
-            @for (pv of store.pageViews().slice(0, 50); track pv.userSeed) {
-              <tr>
+        </thead>
+        <tbody>
+            @for (pv of store.paginatedPageViews(); track pv.userSeed) {
+            <tr>
                 <td>{{ pv.day }}</td>
                 <td class="mono">{{ pv.path }}</td>
                 <td class="mono muted">
-                  {{ pv.userSeed.slice(0, 8) }}…
+                {{ pv.userSeed }}
                 </td>
-              </tr>
+            </tr>
             }
-          </tbody>
+        </tbody>
         </table>
-      </div>
+    </div>
+
+    <div class="pagination">
+        <button
+        (click)="store.prevPage()"
+        [disabled]="store.page() === 1">
+        ← Prev
+        </button>
+
+        <span>
+        Page {{ store.page() }} / {{ store.totalPages() }}
+        </span>
+
+        <button
+        (click)="store.nextPage()"
+        [disabled]="store.page() === store.totalPages()">
+        Next →
+        </button>
+    </div>
     </section>
+
 
   }
 </section>

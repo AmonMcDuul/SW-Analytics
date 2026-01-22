@@ -24,7 +24,6 @@ h2 {
   opacity: .7;
 }
 
-/* 🔄 LOADING */
 .loading {
   margin-top: 4rem;
   text-align: center;
@@ -45,7 +44,6 @@ h2 {
   to { transform: rotate(360deg); }
 }
 
-/* 📊 KPI GRID */
 .kpi-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -78,13 +76,11 @@ h2 {
   font-weight: 700;
 }
 
-/* Accent glows */
 .accent-blue { box-shadow: inset 0 0 0 1px #4cc9f0; }
 .accent-purple { box-shadow: inset 0 0 0 1px #b5179e; }
 .accent-amber { box-shadow: inset 0 0 0 1px #fca311; }
 .accent-green { box-shadow: inset 0 0 0 1px #4ade80; }
 
-/* 📦 PANELS */
 .panel {
   margin-bottom: 3rem;
   padding: 1.8rem;
@@ -93,7 +89,6 @@ h2 {
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
 }
 
-/* 📋 TABLES */
 .table-wrapper {
   overflow-x: auto;
 }
@@ -125,7 +120,6 @@ tr:hover {
   text-align: right;
 }
 
-/* ✨ DATA STYLES */
 .metric {
   font-weight: 600;
 }
@@ -148,4 +142,80 @@ tr:hover {
 
 .muted {
   opacity: .6;
+}
+
+.table-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.table-toolbar input {
+  flex: 1;
+  max-width: 360px;
+  padding: .6rem .8rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.1);
+  background: rgba(10,12,25,.8);
+  color: #eaeaf0;
+}
+
+.table-toolbar input::placeholder {
+  opacity: .5;
+}
+
+.meta {
+  font-size: .85rem;
+  opacity: .6;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.4rem;
+  margin-top: 1.2rem;
+}
+
+.pagination button {
+  padding: .45rem 1rem;
+  border-radius: 999px;
+  background: rgba(76, 201, 240, .15);
+  color: #4cc9f0;
+  border: none;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  opacity: .3;
+  cursor: not-allowed;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.toggle {
+  display: flex;
+  gap: .4rem;
+}
+
+.toggle button {
+  padding: .35rem .8rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,.05);
+  color: #aaa;
+  border: none;
+  cursor: pointer;
+  font-size: .8rem;
+}
+
+.toggle button.active {
+  background: rgba(76, 201, 240, .25);
+  color: #4cc9f0;
 }
