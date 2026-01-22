@@ -73,6 +73,15 @@ export class AnalyticsStore {
     this.load();
   }
 
+  pageViewsPerUser = computed(() => {
+    const users = this.uniqueUsers();
+    if (users === 0) return 0;
+
+    return Number(
+        (this.totalPageViews() / users).toFixed(2)
+    );
+    });
+
   filteredPageViews = computed(() => {
     const q = this.search().toLowerCase().trim();
 

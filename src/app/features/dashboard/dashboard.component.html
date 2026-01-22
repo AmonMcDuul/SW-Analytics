@@ -25,6 +25,10 @@
         <span class="kpi-label">Total pageviews</span>
         <span class="kpi-value">{{ store.totalPageViews() }}</span>
       </div>
+      <div class="kpi-card accent-cyan">
+        <span class="kpi-label">Views / user</span>
+        <span class="kpi-value">{{ store.pageViewsPerUser() }}</span>
+      </div>
 
       <div class="kpi-card accent-purple">
         <span class="kpi-label">Unique users</span>
