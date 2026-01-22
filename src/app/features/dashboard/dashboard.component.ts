@@ -1,11 +1,10 @@
-import { Component, inject, Inject, OnInit } from '@angular/core';
-import { AnalyticsSummary } from '../../models/analytics-summary.model';
-import { AnalyticsApiService } from '../../services/analytics-api.service';
+import { Component, inject } from '@angular/core';
 import { AnalyticsStore } from '../../store/analytics.store';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
