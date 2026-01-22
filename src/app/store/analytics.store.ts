@@ -69,6 +69,10 @@ export class AnalyticsStore {
     });
   }
 
+  reload(){
+    this.load();
+  }
+
   filteredPageViews = computed(() => {
     const q = this.search().toLowerCase().trim();
 

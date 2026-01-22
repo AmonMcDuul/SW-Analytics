@@ -5,6 +5,12 @@
       <h1>StarWatchr Analytics</h1>
       <p class="subtitle">Traffic & usage insights from StarWatchr</p>
     </div>
+      <button
+        class="reload"
+        (click)="store.reload()"
+        [disabled]="store.loading()">
+        ⟳ Reload
+    </button>
   </header>
 
   @if (store.loading()) {

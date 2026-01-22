@@ -1,4 +1,3 @@
-/* 🌌 GLOBAL */
 .dashboard {
   min-height: 100vh;
   padding: 2.5rem;
@@ -23,6 +22,32 @@ h2 {
 .subtitle {
   opacity: .7;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reload {
+  padding: .45rem 1rem;
+  border-radius: 999px;
+  background: rgba(76, 201, 240, .15);
+  color: #4cc9f0;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.reload:hover {
+  background: rgba(76, 201, 240, .25);
+}
+
+.reload:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
 
 .loading {
   margin-top: 4rem;
