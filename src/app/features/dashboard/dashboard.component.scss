@@ -1,0 +1,36 @@
+.dashboard {
+  padding: 2rem;
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background: #121212;
+  border-radius: 12px;
+  padding: 1.2rem;
+}
+
+.value {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.label {
+  opacity: .7;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+th, td {
+  padding: .6rem;
+  border-bottom: 1px solid #333;
+}

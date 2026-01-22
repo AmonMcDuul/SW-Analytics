@@ -1,0 +1,90 @@
+<section class="dashboard">
+
+  <h1>StarWatchr nalytics</h1>
+
+  @if (store.loading()) {
+    <p>Loading analytics…</p>
+  } @else {
+
+    <div class="kpis">
+      <div class="card">
+        <div class="value">{{ store.totalPageViews() }}</div>
+        <div class="label">Total pageviews</div>
+      </div>
+
+      <div class="card">
+        <div class="value">{{ store.uniqueUsers() }}</div>
+        <div class="label">Unique users</div>
+      </div>
+
+      <div class="card">
+        <div class="value">{{ store.daysTracked() }}</div>
+        <div class="label">Days tracked</div>
+      </div>
+
+      <div class="card">
+        <div class="value">{{ store.avgPerDay() }}</div>
+        <div class="label">Avg / day</div>
+      </div>
+    </div>
+
+    <h2>Daily traffic</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Pageviews</th>
+          <th>Visitors</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (d of store.summary(); track d.day) {
+          <tr>
+            <td>{{ d.day }}</td>
+            <td>{{ d.pageViews }}</td>
+            <td>{{ d.uniqueVisitors }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <h2>Top pages</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Path</th>
+          <th>Views</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of store.topPages(); track p.path) {
+          <tr>
+            <td>{{ p.path }}</td>
+            <td>{{ p.views }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <h2>Recent pageviews</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Path</th>
+          <th>User</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (pv of store.pageViews().slice(0, 50); track pv) {
+          <tr>
+            <td>{{ pv.day }}</td>
+            <td>{{ pv.path }}</td>
+            <td>{{ pv.userSeed.slice(0, 8) }}…</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+  }
+</section>
