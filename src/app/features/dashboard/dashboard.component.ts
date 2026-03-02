@@ -11,6 +11,10 @@ import { CommonModule } from '@angular/common';
 export class DashboardComponent implements OnInit{
   store = inject(AnalyticsStore);
 
+  constructor() {
+    this.store.load();
+  }
+  
   ngOnInit(){
     this.store.load();
   }
