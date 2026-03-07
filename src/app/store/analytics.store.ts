@@ -64,7 +64,12 @@ export class AnalyticsStore {
       pageViews: this.api.getPageViews()
     }).subscribe(res => {
       this.summary.set(res.summary);
-      this.pageViews.set(res.pageViews);
+      this.pageViews.set(
+        res.pageViews.map(p => ({
+          ...p,
+          day: new Date(p.day)
+        }))
+      );      
       this.loading.set(false);
     });
   }

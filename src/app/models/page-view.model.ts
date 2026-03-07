@@ -1,5 +1,5 @@
 export interface PageView {
   userSeed: string;
-  day: string;
+  day: Date;
   path: string;
 }
