@@ -17,7 +17,7 @@ export class AnalyticsStore {
   pageSize = signal(25);
 
   readonly TRAFFIC_WINDOWS = [7, 30, 90] as const;
-  trafficDays = signal<(typeof this.TRAFFIC_WINDOWS)[number]>(30);
+  trafficDays = signal<(typeof this.TRAFFIC_WINDOWS)[number]>(7);
 
   totalPageViews = computed(() =>
     this.summary().reduce((sum, d) => sum + d.pageViews, 0)
