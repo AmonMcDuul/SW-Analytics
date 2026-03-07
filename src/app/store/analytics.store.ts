@@ -67,8 +67,8 @@ export class AnalyticsStore {
       this.pageViews.set(
         res.pageViews.map(p => ({
           ...p,
-          day: new Date(p.day)
-        }))
+          day: new Date(new Date(p.day).getTime() + 3600000)
+          }))
       );      
       this.loading.set(false);
     });

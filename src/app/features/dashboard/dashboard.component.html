@@ -132,7 +132,7 @@
         <tbody>
             @for (pv of store.paginatedPageViews(); track pv.userSeed) {
             <tr>
-                <td>{{ pv.day | date:'yyyy-MM-dd HH:mm:ss':'Europe/Amsterdam' }}</td>
+                <td>{{ pv.day | date:'yyyy-MM-dd HH:mm:ss' }}</td>
                 <td class="mono">{{ pv.path }}</td>
                 <td class="mono muted">
                 {{ pv.userSeed }}
